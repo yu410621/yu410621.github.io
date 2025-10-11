@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/biubiubiu.gif">
 <meta property="article:published_time" content="2025-10-11T03:15:27.000Z">
-<meta property="article:modified_time" content="2025-10-11T03:19:48.035Z">
+<meta property="article:modified_time" content="2025-10-11T03:21:21.138Z">
 <meta property="article:author" content="李焕宇">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/images/biubiubiu.gif"><script type="application/ld+json">{
@@ -17,7 +17,7 @@
   "url": "http://example.com/2025/10/11/loongarch-gcc/",
   "image": "http://example.com/images/biubiubiu.gif",
   "datePublished": "2025-10-11T03:15:27.000Z",
-  "dateModified": "2025-10-11T03:19:48.035Z",
+  "dateModified": "2025-10-11T03:21:21.138Z",
   "author": [
     {
       "@type": "Person",
@@ -158,7 +158,7 @@
   isHighlightShrink: false,
   isToc: true,
   pageType: 'post'
-}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">李焕宇的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">gcc源码分析：Loongarch编译gcc-12报错问题定位</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">gcc源码分析：Loongarch编译gcc-12报错问题定位</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-11T03:15:27.000Z" title="发表于 2025-10-11 11:15:27">2025-10-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-10-11T03:19:48.035Z" title="更新于 2025-10-11 11:19:48">2025-10-11</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h1><ul>
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">李焕宇的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">gcc源码分析：Loongarch编译gcc-12报错问题定位</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">gcc源码分析：Loongarch编译gcc-12报错问题定位</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-11T03:15:27.000Z" title="发表于 2025-10-11 11:15:27">2025-10-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-10-11T03:21:21.138Z" title="更新于 2025-10-11 11:21:21">2025-10-11</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h1><ul>
 <li><p>基础环境是<code>gcc-8.5</code>与<code>binutils-2.30</code>版本，为满足其他组的<code>ollama</code>升级需求，需引入高版本<code>gcc</code></p>
 </li>
 <li><p>引入方式：基于欧拉的<code>gcc-12</code>编译为<code>gcc-toolset-12</code>，与基础环境<code>gcc-8.5</code>共存</p>
